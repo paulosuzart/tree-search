@@ -14,11 +14,10 @@ public class BreadthSearch extends TreeSearcher {
         super(searchFor, root);
     }
 
-
     /**
-     * Do the actual serach
-     * @param nodes
-     * @return the Optional node if found or empy
+     * Do the actual search
+     * @param nodes the list of nodes at the same level to be searched
+     * @return the Optional node if found or empty
      */
     private Optional<Node> doSearch(List<Optional<Node>> nodes) {
 
@@ -38,8 +37,12 @@ public class BreadthSearch extends TreeSearcher {
             }
 
             node.ifPresent(currentNode -> {
-                nextSearchNodes.add(currentNode.getLeft());
-                nextSearchNodes.add(currentNode.getRight());
+                if (currentNode.getLeft().isPresent()) {
+                    nextSearchNodes.add(currentNode.getLeft());
+                }
+                if (currentNode.getRight().isPresent()) {
+                    nextSearchNodes.add(currentNode.getRight());
+                }
             });
 
         }
