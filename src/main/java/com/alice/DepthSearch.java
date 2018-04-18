@@ -16,25 +16,21 @@ public class DepthSearch extends TreeSearcher {
     /**
      * Do the actual search
      *
-     * @param currentNode
+     * @param currentNode is the current node being checked
      * @return the found node or Optional.empty if none
      */
     private Optional<Node> doSearch(Optional<Node> currentNode) {
         System.out.println("Looking at the following node " + currentNode);
-        Optional<Node> found = currentNode.flatMap(node -> {
+
+        return currentNode.flatMap(node -> {
             if (node.getValue().equals(this.searchFor)) {
                 return Optional.of(node);
             }
 
-            Optional<Node> foundLeft = doSearch(node.getLeft());
-
-            Node foundRight = foundLeft.orElse(doSearch(node.getRight()).orElse(null));
-
-            return Optional.ofNullable(foundRight);
+            return Optional.ofNullable(doSearch(node.getLeft()).orElse(doSearch(node.getRight()).orElse(null)));
 
         });
 
-        return found;
     }
 
     @Override
