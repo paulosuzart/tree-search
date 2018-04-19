@@ -23,7 +23,7 @@ public class DepthSearch extends TreeSearcher {
         System.out.println("Looking at the following node " + currentNode);
 
         return currentNode.flatMap(node -> {
-            if (node.getValue().equals(this.searchFor)) {
+            if (node.getValue() == this.searchFor) {
                 return Optional.of(node);
             }
 
@@ -35,7 +35,7 @@ public class DepthSearch extends TreeSearcher {
 
     @Override
     public Optional<Node> search() {
-
+        System.out.println("Looking for value: " + this.searchFor);
         return this.doSearch(this.root);
     }
 }

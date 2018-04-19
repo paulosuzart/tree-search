@@ -12,7 +12,7 @@ public class Node implements Serializable {
     /**
      * The value te node holds itself
      */
-    private Integer value;
+    private int value;
 
     /**
      * A optional pointer to a right node down below
@@ -54,7 +54,7 @@ public class Node implements Serializable {
     }
 
 
-    public Integer getValue() {
+    public int getValue() {
         return this.value;
     }
 

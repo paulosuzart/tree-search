@@ -1,15 +1,15 @@
 package com.alice;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BreadthSearchTest {
+class BreadthSearchTest {
 
     private static Node root;
 
@@ -40,21 +40,23 @@ public class BreadthSearchTest {
     @DisplayName("Find value 3 on the tree")
     void findBreadthTest() {
         TreeSearcher searcher = new BreadthSearch(20, Optional.of(BreadthSearchTest.root));
-        searcher.search().ifPresent(node -> assertEquals(new Integer(20), node.getValue()));
+        Optional<Node> found = searcher.search();
+        assertEquals(20, found.get().getValue());
     }
 
     @Test
     @DisplayName("Find empty node while looking for 1 on the tree")
     void findEmpty() {
         TreeSearcher searcher = new BreadthSearch(1, Optional.of(BreadthSearchTest.root));
-        searcher.search().ifPresent(node -> assertEquals(Optional.empty(), node));
+        assertEquals(Optional.empty(), searcher.search());
     }
 
     @Test
     @DisplayName("Find value 3 on the tree")
     void findBreadthRightTest() {
         TreeSearcher searcher = new BreadthSearch(100, Optional.of(BreadthSearchTest.root));
-        searcher.search().ifPresent(node -> assertEquals(new Integer(100), node.getValue()));
+        Optional<Node> found = searcher.search();
+        assertEquals(100, found.get().getValue());
     }
 
 }

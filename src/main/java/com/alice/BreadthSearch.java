@@ -30,7 +30,7 @@ public class BreadthSearch extends TreeSearcher {
 
 
         for (final Optional<Node> node : nodes) {
-            Optional<Node> found = node.filter(currentNode -> currentNode.getValue().equals(this.searchFor));
+            Optional<Node> found = node.filter(currentNode -> currentNode.getValue() == this.searchFor);
 
             if (found.isPresent()) {
                 return found;
