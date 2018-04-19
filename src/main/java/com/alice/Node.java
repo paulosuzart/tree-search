@@ -1,15 +1,15 @@
 package com.alice;
 
 
-import java.io.Serializable;
+
 import java.util.Optional;
 
 /**
  * Represents a node in a tree
  */
-public class Node implements Serializable {
+public class Node {
 
-    /**
+	/**
      * The value te node holds itself
      */
     private int value;
