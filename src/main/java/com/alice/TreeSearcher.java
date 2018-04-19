@@ -9,14 +9,14 @@ public abstract class TreeSearcher {
     /**
      * The value the algorithm must look for
      */
-    protected final Integer searchFor;
+    protected final int searchFor;
 
     /**
      * The root start node to start the search
      */
     protected final Optional<Node> root;
 
-    TreeSearcher(Integer searchFor, Optional<Node> root) {
+    TreeSearcher(int searchFor, Optional<Node> root) {
         this.searchFor = searchFor;
         this.root = root;
     }
