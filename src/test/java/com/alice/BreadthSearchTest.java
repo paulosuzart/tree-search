@@ -39,7 +39,7 @@ class BreadthSearchTest {
     @Test
     @DisplayName("Find value 3 on the tree")
     void findBreadthTest() {
-        TreeSearcher searcher = new BreadthSearch(20, Optional.of(BreadthSearchTest.root));
+        TreeSearcher searcher = new BreadthSearch(20, root);
         Optional<Node> found = searcher.search();
         assertEquals(20, found.get().getValue());
     }
@@ -47,14 +47,14 @@ class BreadthSearchTest {
     @Test
     @DisplayName("Find empty node while looking for 1 on the tree")
     void findEmpty() {
-        TreeSearcher searcher = new BreadthSearch(1, Optional.of(BreadthSearchTest.root));
+        TreeSearcher searcher = new BreadthSearch(1, root);
         assertEquals(Optional.empty(), searcher.search());
     }
 
     @Test
     @DisplayName("Find value 3 on the tree")
     void findBreadthRightTest() {
-        TreeSearcher searcher = new BreadthSearch(100, Optional.of(BreadthSearchTest.root));
+        TreeSearcher searcher = new BreadthSearch(100, root);
         Optional<Node> found = searcher.search();
         assertEquals(100, found.get().getValue());
     }

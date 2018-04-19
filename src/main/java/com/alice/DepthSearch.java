@@ -9,7 +9,7 @@ import java.util.Optional;
  */
 public class DepthSearch extends TreeSearcher {
 
-    DepthSearch(Integer searchFor, Optional<Node> root) {
+    DepthSearch(Integer searchFor, Node root) {
         super(searchFor, root);
     }
 
@@ -36,6 +36,6 @@ public class DepthSearch extends TreeSearcher {
     @Override
     public Optional<Node> search() {
         System.out.println("Looking for value: " + this.searchFor);
-        return this.doSearch(this.root);
+        return this.doSearch(Optional.of(this.root));
     }
 }

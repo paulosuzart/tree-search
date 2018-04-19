@@ -34,7 +34,7 @@ class DepthSearchTest {
     @Test
     @DisplayName("Find value 3 on the tree")
     void findDeepTest() {
-        TreeSearcher searcher = new DepthSearch(3, Optional.of(DepthSearchTest.root));
+        TreeSearcher searcher = new DepthSearch(3, root);
         Optional<Node> found = searcher.search();
         assertEquals(3, found.get().getValue());
     }
@@ -42,7 +42,7 @@ class DepthSearchTest {
     @Test
     @DisplayName("Find empty node while looking for 1 on the tree")
     void findEmpty() {
-        TreeSearcher searcher = new DepthSearch(1, Optional.of(DepthSearchTest.root));
+        TreeSearcher searcher = new DepthSearch(1, root);
         assertEquals(Optional.empty(), searcher.search());
     }
 }

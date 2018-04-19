@@ -14,9 +14,9 @@ public abstract class TreeSearcher {
     /**
      * The root start node to start the search
      */
-    protected final Optional<Node> root;
+    protected final Node root;
 
-    TreeSearcher(int searchFor, Optional<Node> root) {
+    TreeSearcher(int searchFor, Node root) {
         this.searchFor = searchFor;
         this.root = root;
     }
