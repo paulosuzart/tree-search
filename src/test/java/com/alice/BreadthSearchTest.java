@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
+import io.vavr.control.Option;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -40,7 +40,7 @@ class BreadthSearchTest {
     @DisplayName("Find value 3 on the tree")
     void findBreadthTest() {
         TreeSearcher searcher = new BreadthSearch(20, root);
-        Optional<Node> found = searcher.search();
+        Option<Node> found = searcher.search();
         assertEquals(20, found.get().getValue());
     }
 
@@ -48,14 +48,14 @@ class BreadthSearchTest {
     @DisplayName("Find empty node while looking for 1 on the tree")
     void findEmpty() {
         TreeSearcher searcher = new BreadthSearch(1, root);
-        assertEquals(Optional.empty(), searcher.search());
+        assertEquals(Option.none(), searcher.search());
     }
 
     @Test
     @DisplayName("Find value 3 on the tree")
     void findBreadthRightTest() {
         TreeSearcher searcher = new BreadthSearch(100, root);
-        Optional<Node> found = searcher.search();
+        Option<Node> found = searcher.search();
         assertEquals(100, found.get().getValue());
     }
 

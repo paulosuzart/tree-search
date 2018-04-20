@@ -1,8 +1,6 @@
 package com.alice;
 
-
-
-import java.util.Optional;
+import io.vavr.control.Option;
 
 /**
  * Represents a node in a tree
@@ -15,41 +13,41 @@ public class Node {
     private int value;
 
     /**
-     * A optional pointer to a right node down below
+     * A Option pointer to a right node down below
      */
-    private Optional<Node> right = Optional.empty();
+    private Option<Node> right = Option.none();
 
     /**
-     * A optional pointer to a left node down below
+     * A Option pointer to a left node down below
      */
-    private Optional<Node> left = Optional.empty();
+    private Option<Node> left = Option.none();
 
     Node(Integer value) {
         this.value = value;
     }
 
     @SuppressWarnings("unused")
-    Node(Integer value, Optional<Node> left, Optional<Node> right) {
+    Node(Integer value, Option<Node> left, Option<Node> right) {
         this.value = value;
         this.right = right;
         this.left = left;
     }
 
     @SuppressWarnings("unused")
-    Node(Integer value, Optional<Node> left) {
+    Node(Integer value, Option<Node> left) {
         this.value = value;
         this.right = left;
     }
 
     public Node setToLeft(Integer value) {
         Node newNode = new Node(value);
-        this.left = Optional.of(newNode);
+        this.left = Option.of(newNode);
         return newNode;
     }
 
     public Node setToRight(Integer value) {
         Node newNode = new Node(value);
-        this.right = Optional.of(newNode);
+        this.right = Option.of(newNode);
         return newNode;
     }
 
@@ -58,11 +56,11 @@ public class Node {
         return this.value;
     }
 
-    public Optional<Node> getRight() {
+    public Option<Node> getRight() {
         return right;
     }
 
-    public Optional<Node> getLeft() {
+    public Option<Node> getLeft() {
         return left;
     }
 

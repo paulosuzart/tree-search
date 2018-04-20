@@ -1,10 +1,13 @@
 package com.alice;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import io.vavr.Function1;
+import io.vavr.Function2;
+import io.vavr.collection.List;
+import io.vavr.control.Option;
 
 /**
  * Implements a simple breadth first search algorithm
@@ -15,44 +18,28 @@ public class BreadthSearch extends TreeSearcher {
         super(searchFor, root);
     }
 
-    private static Consumer<Node> enqueue(final List<Node> list) {
-        return n -> list.add(n);
+    private Supplier<Option<Node>> checkChildren(List<Node> nodes) {
+        List<Node> children = nodes.flatMap(Node::getLeft).appendAll(nodes.flatMap(Node::getRight));
+        return () -> children.isEmpty() ? Option.none() : doSearch(children);
+        // return () -> doSearch(nodes.flatMap(Node::getLeft).appendAll(nodes.flatMap(Node::getRight)));
     }
-
+    
     /**
      * Do the actual search
      * @param nodes the list of nodes at the same level to be searched
      * @return the Optional node if found or empty
      */
-    private Optional<Node> doSearch(List<Node> nodes) {
-
-        if (nodes.isEmpty()) {
-            return Optional.empty();
-        }
+    private Option<Node> doSearch(List<Node> nodes) {
 
         System.out.println("Looking at the following nodes: " + nodes);
-        List<Node> nextSearchNodes = new ArrayList<>();
-
-
-        for (final Node node : nodes) {
-            
-            if (node.getValue() == this.searchFor) {
-                return Optional.of(node);
-            }
-            
-            node.getLeft().ifPresent(enqueue(nextSearchNodes));
-            node.getRight().ifPresent(enqueue(nextSearchNodes));
-
-        }
-
-        return this.doSearch(nextSearchNodes);
+        return nodes.filter(isSerachFor()).toOption().orElse(checkChildren(nodes));
+      
     }
 
 
     @Override
-    public Optional<Node> search() {
-        List<Node> seedNodes = new ArrayList<>();
-        seedNodes.add(this.root);
-        return this.doSearch(seedNodes);
+    public Option<Node> search() {
+        System.out.println("Breadth Started... Looking for value : " + this.searchFor);
+        return this.doSearch(List.of(this.root));
     }
 }

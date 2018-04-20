@@ -1,6 +1,9 @@
 package com.alice;
 
-import java.util.Optional;
+import java.util.Objects;
+import java.util.function.Predicate;
+
+import io.vavr.control.Option;
 
 /**
  * Abstract class to be implemented by search algorithms.
@@ -18,7 +21,11 @@ public abstract class TreeSearcher {
 
     TreeSearcher(int searchFor, Node root) {
         this.searchFor = searchFor;
-        this.root = root;
+        this.root = Objects.requireNonNull(root);
+    }
+
+    protected Predicate<Node> isSerachFor() {
+        return n -> n.getValue() == this.searchFor;
     }
 
     /**
@@ -26,5 +33,5 @@ public abstract class TreeSearcher {
      *
      * @return
      */
-    public abstract Optional<Node> search();
+    public abstract Option<Node> search();
 }

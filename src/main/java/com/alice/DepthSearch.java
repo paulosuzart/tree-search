@@ -1,41 +1,29 @@
 package com.alice;
 
+import java.util.function.Supplier;
 
-import java.util.Optional;
+import io.vavr.control.Option;
 
-/**
- * Searches for a node that holds a given value.
- * WARN: Returns the first node that holds the value.
- */
-public class DepthSearch extends TreeSearcher {
+class DepthSearch extends TreeSearcher {
 
-    DepthSearch(Integer searchFor, Node root) {
+    DepthSearch(int searchFor, Node root) {
         super(searchFor, root);
     }
 
-    /**
-     * Do the actual search
-     *
-     * @param currentNode is the current node being checked
-     * @return the found node or Optional.empty if none
-     */
-    private Optional<Node> doSearch(Optional<Node> currentNode) {
+    private Supplier<Option<Node>> checkChildren(Option<Node> node) {
+        return () -> node.flatMap(n -> doSearch(n.getLeft()).orElse(doSearch(n.getRight())));
+    }
+
+    private Option<Node> doSearch(Option<Node> currentNode) {
+
         System.out.println("Looking at the following node " + currentNode);
-
-        return currentNode.flatMap(node -> {
-            if (node.getValue() == this.searchFor) {
-                return Optional.of(node);
-            }
-
-            return Optional.ofNullable(doSearch(node.getLeft()).orElse(doSearch(node.getRight()).orElse(null)));
-
-        });
-
+        return currentNode.filter(isSerachFor()).orElse(checkChildren(currentNode));
     }
 
     @Override
-    public Optional<Node> search() {
-        System.out.println("Looking for value: " + this.searchFor);
-        return this.doSearch(Optional.of(this.root));
+    public Option<Node> search() {
+        System.out.println("Depth started... Looking for " + this.searchFor);
+        return this.doSearch(Option.some(this.root));
     }
+
 }
