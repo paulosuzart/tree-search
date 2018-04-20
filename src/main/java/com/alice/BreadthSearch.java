@@ -21,7 +21,6 @@ public class BreadthSearch extends TreeSearcher {
     private Supplier<Option<Node>> checkChildren(List<Node> nodes) {
         List<Node> children = nodes.flatMap(Node::getLeft).appendAll(nodes.flatMap(Node::getRight));
         return () -> children.isEmpty() ? Option.none() : doSearch(children);
-        // return () -> doSearch(nodes.flatMap(Node::getLeft).appendAll(nodes.flatMap(Node::getRight)));
     }
     
     /**
