@@ -1,11 +1,8 @@
 package com.alice;
 
 
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import io.vavr.Function1;
-import io.vavr.Function2;
 import io.vavr.collection.List;
 import io.vavr.control.Option;
 
@@ -14,7 +11,7 @@ import io.vavr.control.Option;
  */
 public class BreadthSearch extends TreeSearcher {
 
-    BreadthSearch(Integer searchFor, Node root) {
+    BreadthSearch(int searchFor, Node root) {
         super(searchFor, root);
     }
 
