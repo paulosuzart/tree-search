@@ -55,7 +55,7 @@ public abstract class TreeSearcher {
             }
 
             List<Node> nextNodes = List.of(currentNode.getLeft(), currentNode.getRight()).flatMap(n -> n);
-            toSearch = getF(toSearch).apply(nextNodes);
+            toSearch = getF(nextNodes).apply(toSearch);
         }
 
         return Option.none();
