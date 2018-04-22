@@ -1,11 +1,7 @@
 package com.alice;
 
-import java.util.function.Supplier;
-
 import io.vavr.Function1;
-import io.vavr.Tuple2;
 import io.vavr.collection.List;
-import io.vavr.control.Option;
 
 class DepthSearch extends TreeSearcher {
 
