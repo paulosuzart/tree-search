@@ -40,7 +40,7 @@ public abstract class TreeSearcher {
      */
     public Option<Node> search() {
         
-        System.out.println("Breadth Started... Looking for value : " + this.searchFor);
+        System.out.println("Started... Looking for value : " + this.searchFor);
 
         List<Node> toSearch = List.of(this.root);
 
@@ -55,7 +55,7 @@ public abstract class TreeSearcher {
             }
 
             List<Node> nextNodes = List.of(currentNode.getLeft(), currentNode.getRight()).flatMap(n -> n);
-            toSearch = getF(toSearch).apply(nextNodes);
+            toSearch = getF(nextNodes).apply(toSearch);
         }
 
         return Option.none();
